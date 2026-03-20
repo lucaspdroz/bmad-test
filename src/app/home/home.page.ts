@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import {
   IonHeader,
   IonToolbar,
@@ -60,6 +61,7 @@ const STORAGE_KEY = 'ztalk-app-state';
     IonSelect,
     IonSelectOption,
     FormsModule,
+    CommonModule,
   ],
 })
 export class HomePage {
