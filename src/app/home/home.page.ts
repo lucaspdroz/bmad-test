@@ -80,6 +80,8 @@ export class HomePage {
   }
 
   saveSettings() {
+    if (this.gridColumns < 1) this.gridColumns = 1;
+    if (this.gridColumns > 4) this.gridColumns = 4;
     this.persistState();
   }
 
@@ -99,9 +101,17 @@ export class HomePage {
     const cards = this.selectedFolder.cards;
     const fromIndex = cards.findIndex((c) => c.id === this.draggedCardId);
     const toIndex = cards.findIndex((c) => c.id === targetCardId);
-    if (fromIndex === -1 || toIndex === -1) return;
+    if (fromIndex === -1 || toIndex === -1) {
+      this.draggedCardId = null;
+      return;
+    }
 
     const [movedCard] = cards.splice(fromIndex, 1);
+    if (!movedCard) {
+      this.draggedCardId = null;
+      return;
+    }
+
     cards.splice(toIndex, 0, movedCard);
     this.persistState();
     this.draggedCardId = null;
