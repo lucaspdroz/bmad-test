@@ -49,21 +49,23 @@
         </ion-item>
         <ion-button expand="block" size="large" (click)="addCard()" [disabled]="!newCardText.trim()">Add card</ion-button>
 
-        <ion-list>
-          <ion-list-header>Cards</ion-list-header>
-          <ion-reorder-group disabled="false" (ionItemReorder)="reorderCards($event)">
-            <ion-item *ngFor="let card of selectedFolder.cards" lines="full" class="card-item">
-              <ion-label>{{ card.text }}</ion-label>
-              <ion-button fill="outline" color="success" size="small" (click)="speakCard(card)">Speak</ion-button>
-              <ion-button fill="outline" color="primary" size="small" (click)="editCard(card)">Edit</ion-button>
-              <ion-button fill="outline" color="danger" size="small" (click)="deleteCard(card.id)">Delete</ion-button>
-              <ion-select [value]="selectedFolderId" (ionChange)="moveCard(card.id, $event.detail.value)">
-                <ion-select-option *ngFor="let folder of folders" [value]="folder.id">{{ folder.name }}</ion-select-option>
-              </ion-select>
-              <ion-reorder slot="end"></ion-reorder>
-            </ion-item>
-          </ion-reorder-group>
-        </ion-list>
+        <ion-item>
+          <ion-label>Grid columns</ion-label>
+          <ion-select [(ngModel)]="gridColumns" interface="popover" (ionChange)="saveSettings()">
+            <ion-select-option *ngFor="let value of columnOptions" [value]="value">{{ value }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="card-grid" [ngStyle]="{'grid-template-columns': 'repeat(' + gridColumns + ', minmax(160px, 1fr))'}">
+          <div class="card-tile" *ngFor="let card of selectedFolder.cards" draggable="true" (dragstart)="dragStart($event, card.id)" (drop)="dropCard($event, card.id)" (dragover)="allowDrop($event)">
+            <div class="card-text">{{ card.text }}</div>
+            <div class="card-actions">
+              <ion-button fill="clear" color="success" size="small" (click)="speakCard(card)">Speak</ion-button>
+              <ion-button fill="clear" color="primary" size="small" (click)="editCard(card)">Edit</ion-button>
+              <ion-button fill="clear" color="danger" size="small" (click)="deleteCard(card.id)">Delete</ion-button>
+            </div>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
 

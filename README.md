@@ -22,6 +22,10 @@ A simple accessible communication app for users with speech disabilities, built 
   - Create, rename, delete folder
   - Assign cards into folders
   - Supports active folder selection for focus
+- Card display grid:
+  - Cards render in a responsive grid
+  - User can choose columns (1-4) for desktop/mobile layout
+  - Drag-and-drop and keyboard-accessible interactions
 
 - UI/UX:
   - Large high-contrast controls

@@ -36,6 +36,34 @@ ion-select {
   color: #fff;
 }
 
+.card-grid {
+  display: grid;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.card-tile {
+  background: #222;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+.card-text {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card-item {
   align-items: center;
 }

@@ -45,6 +45,8 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 4. Design state model as folder -> cards relation.  
 5. Use Web Speech API / Capacitor TTS plugin for native text-to-speech.  
 6. Support drag-and-drop within folder/card UI using Ionic reorder groups.
+7. Display cards in responsive grid with configurable column count (user-selectable 1-4 columns).
+8. Add a UI/UX agent mindset to handle high-contrast, large-touch controls, accessibility, and dynamic layout behavior.
 
 ## 4. Next step
 

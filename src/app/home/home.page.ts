@@ -67,6 +67,9 @@ export class HomePage {
   selectedFolderId: string | null = null;
   newFolderName = '';
   newCardText = '';
+  gridColumns = 2;
+  columnOptions = [1, 2, 3, 4];
+  draggedCardId: string | null = null;
 
   constructor() {
     this.loadState();
@@ -74,6 +77,34 @@ export class HomePage {
 
   get selectedFolder(): FolderItem | undefined {
     return this.folders.find((f) => f.id === this.selectedFolderId);
+  }
+
+  saveSettings() {
+    this.persistState();
+  }
+
+  allowDrop(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  dragStart(event: DragEvent, cardId: string) {
+    this.draggedCardId = cardId;
+    event.dataTransfer?.setData('text/plain', cardId);
+  }
+
+  dropCard(event: DragEvent, targetCardId: string) {
+    event.preventDefault();
+    if (!this.draggedCardId || !this.selectedFolder) return;
+
+    const cards = this.selectedFolder.cards;
+    const fromIndex = cards.findIndex((c) => c.id === this.draggedCardId);
+    const toIndex = cards.findIndex((c) => c.id === targetCardId);
+    if (fromIndex === -1 || toIndex === -1) return;
+
+    const [movedCard] = cards.splice(fromIndex, 1);
+    cards.splice(toIndex, 0, movedCard);
+    this.persistState();
+    this.draggedCardId = null;
   }
 
   persistState() {
